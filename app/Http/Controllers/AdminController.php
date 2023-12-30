@@ -15,6 +15,7 @@ use DB;
 class AdminController extends Controller
 {
     public function AdminDashboard(){
+        $hello = "Hello";
         return view('admin.index');
 
     }
