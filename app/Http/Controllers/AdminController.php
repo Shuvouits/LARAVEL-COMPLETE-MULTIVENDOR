@@ -15,7 +15,9 @@ use DB;
 class AdminController extends Controller
 {
     public function AdminDashboard(){
+        $data = "shuvo";
         return view('admin.index');
+
     }
 
     public function AdminDestroy(Request $request)
