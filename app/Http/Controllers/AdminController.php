@@ -152,10 +152,13 @@ class AdminController extends Controller
         $user->status = 'active';
         $user->save();
 
-        //$user->roles()->detach();
+
+        $user->roles()->detach();
         if ($request->roles) {
-            DB::table('model_has_roles')->where('model_id', $id)->update(['role_id' => $request->roles]);
-            //$user->assignRole($request->roles);
+            //DB::table('model_has_roles')->where('model_id', $id)->update(['role_id' => $request->roles]);
+
+            $role = Role::findOrFail($request->roles);
+            $user->assignRole($role);
         }
 
          $notification = array(
@@ -179,6 +182,8 @@ class AdminController extends Controller
             'message' => 'Admin User Deleted Successfully',
             'alert-type' => 'success'
         );
+
+        
 
         return redirect()->back()->with($notification);
 

@@ -100,6 +100,8 @@ class RoleController extends Controller
     public function StoreRoles(Request $request){
 
         $checking_role = Role::where('name', $request->name)->first();
+
+        
         
         if($checking_role){
             $notification = array(
@@ -113,6 +115,8 @@ class RoleController extends Controller
             'name' => $request->name, 
 
         ]);
+
+      
 
         $notification = array(
             'message' => 'Roles Inserted Successfully',
@@ -169,12 +173,23 @@ class RoleController extends Controller
 
 
    public function RolePermissionStore(Request $request){
+
+    $data = array();
+    $permissions = $request->permission;
+
+    foreach($permissions as $key => $item){
+        $data['role_id'] = $request->role_id;
+        $data['permission_id'] = $item;
+
+        DB::table('role_has_permissions')->insert($data);
+    }
+
+    
+
+    /*
     $data = array();
     //$permissions = $request->permission;
     $permissions = $request->input('permission', []);
-
-
-   
 
     foreach($permissions as $key => $item){
         $data['role_id'] = $request->role_id;
@@ -182,20 +197,21 @@ class RoleController extends Controller
         $user_id = Auth::user()->id;
 
         DB::table('role_has_permissions')->insert($data);
-
+        //
         DB::table('model_has_permissions')->insert([
             'permission_id' => $data['permission_id'],
             'model_type' => 'App\Models\User',
             'model_id' => $user_id
         ]);
-    }
+        //
+    }  */
 
      $notification = array(
         'message' => 'Role Permission Added Successfully',
         'alert-type' => 'success'
     );
 
-    return redirect('/all/roles/permission')->route('all.roles')->with($notification); 
+    return redirect('/all/roles/permission')->with($notification); 
 
    }
 
@@ -218,14 +234,21 @@ class RoleController extends Controller
 
 
     public function AdminRolesUpdate(Request $request,$id){
+
         
         $role = Role::findOrFail($id);
-        //$permissions = $request->permission;
+
+
+        $permissions = $request->permission ;
+
+        if (!empty($permissions)) {
+            $permissions = array_map('intval', $permissions);
+            $role->syncPermissions($permissions);
+        }
+
+        /*
         $permissions = $request->input('permission', []);
-
         $user_id = Auth::user()->id;
-
-        //return $permissions;
         $delete_data = DB::table('role_has_permissions')->where('role_id', $role->id)->delete();
         $delete_data = DB::table('model_has_permissions')->where('model_id', $user_id)->delete();
         $data = array();
@@ -244,13 +267,17 @@ class RoleController extends Controller
 
         
 
-        }
+        }   */
 
 
          $notification = array(
             'message' => 'Role Permission Updated Successfully',
             'alert-type' => 'success'
         );
+
+    
+
+        
 
         return redirect('/all/roles/permission')->with($notification); 
 

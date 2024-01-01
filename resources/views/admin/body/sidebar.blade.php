@@ -42,13 +42,10 @@
 
 
             </ul>
-        </li>
+        </li> 
         @endif
 
-    
-
-    
-        @if(Auth::user()->can('cat.menu'))
+        @if(Auth::user()->can('category.menu'))
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -70,8 +67,10 @@
             </ul>
         </li>
         @endif
+       
+       
 
-        @if(Auth::user()->can('subcategory.menu'))
+        @if(Auth::user()->can('subcategory.menu'))      
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -87,10 +86,11 @@
 
             </ul>
         </li>
-        @endif 
+        @endif
+    
 
+       
         @if(Auth::user()->can('vendor.menu'))
-
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-cart'></i>
@@ -104,10 +104,11 @@
                 </li>
             </ul>
         </li>
-        @endif 
+        @endif
+    
 
+      
         @if(Auth::user()->can('product.menu'))
-
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -121,10 +122,10 @@
                 </li>
 
             </ul>
-        </li>  
+        </li> 
+        @endif 
 
-        @endif
-
+       
 
         @if(Auth::user()->can('slider.menu'))
         <li>
@@ -142,7 +143,8 @@
             </ul>
         </li>
         @endif
-
+       
+        @if(Auth::user()->can('banner.menu'))
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -157,8 +159,9 @@
 
             </ul>
         </li> 
+        @endif
 
-
+        @if(Auth::user()->can('coupon.menu'))
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -173,6 +176,9 @@
 
             </ul>
         </li>
+        @endif
+
+        @if(Auth::user()->can('shipping.menu'))
 
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -192,6 +198,9 @@
             </ul>
         </li>  
 
+        @endif
+         
+        @if(Auth::user()->can('order.menu'))
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-cart'></i>
@@ -212,7 +221,9 @@
 
             </ul>
         </li>
+        @endif
 
+        @if(Auth::user()->can('return.menu'))
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-cart'></i>
@@ -226,7 +237,9 @@
                 </li> 
             </ul>
         </li>
+        @endif
 
+        @if(Auth::user()->can('report.menu'))
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-cart'></i>
@@ -242,7 +255,9 @@
                 
             </ul>
         </li>
+        @endif
 
+        @if(Auth::user()->can('user.menu'))
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -259,7 +274,9 @@
 
             </ul>
         </li>
+        @endif
 
+        @if(Auth::user()->can('blog.menu'))
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -276,7 +293,9 @@
 
             </ul>
         </li>
+        @endif 
 
+        @if(Auth::user()->can('review.menu'))
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -295,8 +314,9 @@
     
             </ul>
         </li>
+        @endif
 
-
+        @if(Auth::user()->can('setting.menu'))
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -312,7 +332,9 @@
     
             </ul>
         </li>
-
+        @endif
+        
+        @if(Auth::user()->can('stock.menu'))
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -328,7 +350,10 @@
     
             </ul>
         </li> 
+        @endif 
 
+
+        @if(Auth::user()->can('roles.menu'))
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -353,8 +378,10 @@
                     
             </ul>
         </li>  
+        @endif
+        
 
-
+        @if(Auth::user()->can('admin.menu'))
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class="bx bx-line-chart"></i>
@@ -370,6 +397,8 @@
 
             </ul>
         </li>
+        @endif
+        
 
 
 
