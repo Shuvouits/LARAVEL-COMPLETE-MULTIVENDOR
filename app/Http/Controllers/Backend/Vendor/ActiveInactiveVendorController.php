@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend\Vendor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\User;
+use App\Notifications\AdminApproveNotification;
+use Illuminate\Support\Facades\Notification;
 
 class ActiveInactiveVendorController extends Controller
 {
@@ -45,6 +47,9 @@ class ActiveInactiveVendorController extends Controller
             'message' => 'Vendor Active Successfully',
             'alert-type' => 'success'
         );
+
+        $vuser = User::where('role','vendor')->get();
+        Notification::send($vuser, new AdminApproveNotification($request));
 
         return redirect('/active/vendor')->with($notification);
 
