@@ -59,8 +59,14 @@ Route::get('/products/subcat/high-to-low/{id}', [IndexController::class, 'Filter
 Route::get('/products/subcat/featured/{id}', [IndexController::class, 'Featured']);
 Route::post('/products/subcat/price-filter/{id}', [IndexController::class, 'PriceFilter']);
 Route::post('/products/subcat/brand-filter/{id}', [IndexController::class, 'BrandFilter']);
+//end
 
-
+//product-filter-category
+Route::get('/products/cat/low-to-high/{id}', [IndexController::class, 'CFilterLowToHigh']);  //Ajax
+Route::get('/products/cat/high-to-low/{id}', [IndexController::class, 'CFilterHighToLow']);
+Route::get('/products/cat/featured/{id}', [IndexController::class, 'CFeatured']);
+Route::post('/products/cat/price-filter/{id}', [IndexController::class, 'CPriceFilter']);
+Route::post('/products/cat/brand-filter/{id}', [IndexController::class, 'CBrandFilter']);
 //end
 
 //Blog

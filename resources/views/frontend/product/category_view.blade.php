@@ -2,6 +2,9 @@
 
 @section('main')
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
 @section('title')
    {{ $breadcat->category_name }} Category
 @endsection
@@ -27,29 +30,17 @@
         <div class="row flex-row-reverse">
             <div class="col-lg-4-5">
                 <div class="shop-product-fillter">
-                    <div class="totall-product">
-                        <p>We found <strong class="text-brand">{{count($products)}}</strong> items for you!</p>
+
+                    <div class="totall-product" id="targetElement">
+                        <p id="product-found">We found <strong class="text-brand">{{ count($products) }}</strong> items
+                            for you!</p>
                     </div>
+
                     <div class="sort-by-product-area">
                         <div class="sort-by-cover mr-10">
-                            <div class="sort-by-product-wrap">
-                                <div class="sort-by">
-                                    <span><i class="fi-rs-apps"></i>Show:</span>
-                                </div>
-                                <div class="sort-by-dropdown-wrap">
-                                    <span> 50 <i class="fi-rs-angle-small-down"></i></span>
-                                </div>
-                            </div>
-                            <div class="sort-by-dropdown">
-                                <ul>
-                                    <li><a class="active" href="#">50</a></li>
-                                    <li><a href="#">100</a></li>
-                                    <li><a href="#">150</a></li>
-                                    <li><a href="#">200</a></li>
-                                    <li><a href="#">All</a></li>
-                                </ul>
-                            </div>
+                           
                         </div>
+
                         <div class="sort-by-cover">
                             <div class="sort-by-product-wrap">
                                 <div class="sort-by">
@@ -61,17 +52,23 @@
                             </div>
                             <div class="sort-by-dropdown">
                                 <ul>
-                                    <li><a class="active" href="#">Featured</a></li>
-                                    <li><a href="#">Price: Low to High</a></li>
-                                    <li><a href="#">Price: High to Low</a></li>
-                                    <li><a href="#">Release Date</a></li>
-                                    <li><a href="#">Avg. Rating</a></li>
+                                    <li><a href="#" id="featured" data-value="{{ $id }}">Featured</a>
+                                    </li>
+                                    <li><a href="#" id="low-to-high" data-value="{{ $id }}">Price: Low
+                                            to
+                                            High</a></li>
+                                    <li><a href="#" id="high-to-low" data-value="{{ $id }}">Price: High
+                                            to
+                                            Low</a></li>
                                 </ul>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
-                <div class="row product-grid">
+
+                <div class="row product-grid"  id="withoutajax">
 
                     @foreach($products as $product)
                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
@@ -157,134 +154,879 @@
                     <!--end product card-->
 
                 </div>
-                <!--product grid-->
-                <div class="pagination-area mt-20 mb-20">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-start">
-                            <li class="page-item">
-                                <a class="page-link" href="#"><i class="fi-rs-arrow-small-left"></i></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#">6</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#"><i class="fi-rs-arrow-small-right"></i></a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
 
-                <!--End Deals-->
+                 <!-- Ajax filter -->
+
+                 <div id="data" class="row product-grid">
+
+
+                 </div>
+                 <!--end Ajax product card-->
+               
 
 
             </div>
             <div class="col-lg-1-5 primary-sidebar sticky-sidebar">
-                <div class="sidebar-widget widget-category-2 mb-30">
-                    <h5 class="section-title style-1 mb-30">Category</h5>
-                    <ul>
 
-                        @foreach($categories as $item)
-                        <li>
-                            <a href="shop-grid-right.html"> <img src={{asset($item->category_image)}}
-                                    alt="" />{{$item->category_name}}</a><span class="count">{{ $item->products->count() }}</span>
-                        </li>
-                        @endforeach
-                        
-                    </ul>
-                </div>
-                <!-- Fillter By Price -->
-                <div class="sidebar-widget price_range range mb-30">
+                 <!-- Fillter By Price -->
+                 <div class="sidebar-widget price_range range mb-30">
                     <h5 class="section-title style-1 mb-30">Fill by price</h5>
+
                     <div class="price-filter">
                         <div class="price-filter-inner">
                             <div id="slider-range" class="mb-20"></div>
                             <div class="d-flex justify-content-between">
-                                <div class="caption">From: <strong id="slider-range-value1" class="text-brand"></strong>
-                                </div>
-                                <div class="caption">To: <strong id="slider-range-value2" class="text-brand"></strong>
-                                </div>
+                                <div class="caption">From: <strong id="slider-range-value1"
+                                        class="text-brand"></strong></div>
+                                <div class="caption">To: <strong id="slider-range-value2"
+                                        class="text-brand"></strong></div>
                             </div>
                         </div>
                     </div>
-                    <div class="list-group">
-                        <div class="list-group-item mb-10 mt-10">
-                            <label class="fw-900">Color</label>
-                            <div class="custome-checkbox">
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1"
-                                    value="" />
-                                <label class="form-check-label" for="exampleCheckbox1"><span>Red (56)</span></label>
-                                <br />
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2"
-                                    value="" />
-                                <label class="form-check-label" for="exampleCheckbox2"><span>Green (78)</span></label>
-                                <br />
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox3"
-                                    value="" />
-                                <label class="form-check-label" for="exampleCheckbox3"><span>Blue (54)</span></label>
-                            </div>
-                            <label class="fw-900 mt-15">Item Condition</label>
-                            <div class="custome-checkbox">
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11"
-                                    value="" />
-                                <label class="form-check-label" for="exampleCheckbox11"><span>New (1506)</span></label>
-                                <br />
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox21"
-                                    value="" />
-                                <label class="form-check-label" for="exampleCheckbox21"><span>Refurbished
-                                        (27)</span></label>
-                                <br />
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox31"
-                                    value="" />
-                                <label class="form-check-label" for="exampleCheckbox31"><span>Used (45)</span></label>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="shop-grid-right.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
+
+
+                    <br>
+                    <a href="#" id="price-filter" data-value="{{ $id }}"
+                        class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
                         Fillter</a>
-                </div>
-                <!-- Product sidebar Widget -->
-                <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
-                    <h5 class="section-title style-1 mb-30">New products</h5>
+                </div> 
 
-                    @foreach($newProduct as $product)
-                    <div class="single-post clearfix">
-                        <div class="image">
-                            <img src="{{ asset( $product->product_thambnail ) }}" alt="#" />
+                <!-- Fillter By Brand -->
+                <div class="list-group">
+                    <div class="list-group-item mb-10 mt-10">
+                        <h5 class="section-title style-1 mb-30">Fill by brand</h5>
+
+                        <div class="custome-checkbox">
+                            @foreach ($brands as $item)
+                                <input class="form-check-input brand-checkbox" type="checkbox"
+                                    id="exampleCheckbox{{ $loop->index + 1 }}" name="brands[]"
+                                    value="{{ $item->brand->id }}" />
+                                <label class="form-check-label"
+                                    for="exampleCheckbox{{ $loop->index + 1 }}"><span>{{ $item->brand->brand_name }}
+                                        {{ $item->brand->id }}</span></label>
+                                <input type="hidden" name="subcat" data-value="{{ $id }}" />
+                                <br />
+                            @endforeach
+
                         </div>
-                        <div class="content pt-10">
-                            <p><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}">{{ $product->product_name }}</a></p>
-            
-                               @if($product->discount_price == NULL)
-                                <p class="price mb-0 mt-5">${{ $product->selling_price }}</p>
-                               @else
-                               <p class="price mb-0 mt-5">${{ $product->discount_price }}</p>
-                               @endif
-            
-                            <div class="product-rate">
-                                <div class="product-rating" style="width: 90%"></div>
+
+                    </div>
+                </div>
+
+                 <!--category widget --->
+                 <div class="sidebar-widget widget-category-2 mb-30">
+                    <h5 class="section-title style-1 mb-30">Category</h5>
+                    <ul>
+
+                        @foreach ($categories as $item)
+                            <li>
+                                <a href="/product/category/{{ $item->id }}/{{ $item->category_name }}"> <img
+                                        src={{ asset($item->category_image) }}
+                                        alt="" />{{ $item->category_name }}</a><span
+                                    class="count">{{ $item->products->count() }}</span>
+                            </li>
+                        @endforeach
+
+                    </ul>
+                </div>
+
+                
+               
+
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<!---filter mark --->
+
+<script>
+    $(document).ready(function() {
+        $('.sort-by-dropdown ul li a').click(function(event) {
+            event.preventDefault();
+            $('.sort-by-dropdown ul li a').removeClass('active');
+            $(this).addClass('active');
+        });
+    });
+</script>
+
+<!---end -->
+
+
+<!---price low to high --->
+
+<script>
+    $(document).ready(function() {
+        // AJAX request on Get Items button click
+        $('#low-to-high').click(function() {
+            $('#withoutajax').hide();
+            $('#product-found').hide();
+            $('html, body').animate({
+                scrollTop: 260
+            }, 'slow');
+            var value = $(this).data('value');
+            $.ajax({
+                type: 'GET',
+                url: '/products/cat/low-to-high/' + value,
+                success: function(response) {
+                    // Handle the response (list of items)
+                    console.log(response);
+
+                    var productsCount = response.products.length;
+
+                    var rows = ""
+
+                    $.each(response.products, function(key, value) {
+
+                        var discountBadge = "";
+                        if (value.discount_percent === null) {
+                            discountBadge = '<span class="new">New</span>';
+                        } else {
+                            discountBadge = '<span class="hot">' + value
+                                .discount_percent + '%</span>';
+                        }
+
+                        var owner = ""
+
+                        if (value.vendor_id === null) {
+                            owner =
+                                '<span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>';
+                        } else {
+
+                            owner =
+                                '<span class="font-small text-muted">By <a href="vendor-details-1.html">' +
+                                value.vendor_name + '</a></span>';
+
+                        }
+
+                        var price = ""
+
+                        if (value.discount_price === null) {
+                            price = '<div class="product-price"><span>' + value
+                                .selling_price + '</span> </div>'
+                        } else {
+                            price = '<div class="product-price"> <span>' + value
+                                .discount_price +
+                                '</span> <span class="old-price">' + value
+                                .selling_price + '</span> </div>'
+                        }
+
+
+                        rows += `
+
+                        <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="shop-product-right.html">
+                                            <img class="default-img" src="/${value.product_image}"
+                                                alt="" />
+
+                                        </a>
+                                    </div>
+                                    <div class="product-action-1">
+                                        <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i
+                                                class="fi-rs-heart"></i></a>
+                                        <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
+                                                class="fi-rs-shuffle"></i></a>
+                                        <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
+                                            data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                    </div>
+
+                                    
+
+
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        ${discountBadge}
+                                    </div>
+
+                                </div>
+                                <div class="product-content-wrap">
+                                    <div class="product-category">
+                                        <a href="shop-grid-right.html">{{ $product->category->category_name }}</a>
+                                    </div>
+                                    <h2><a href="shop-product-right.html">${value.product_name}</a></h2>
+                                    <div class="product-rate-cover">
+                                        <div class="product-rate d-inline-block">
+                                            <div class="product-rating" style="width: 90%"></div>
+                                        </div>
+                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                    </div>
+
+                                    <div>
+
+                                        
+                                      ${owner}
+                                        
+                                    </div>
+                                    <div class="product-card-bottom">
+
+
+                                       ${price}
+
+
+                                        <div class="add-cart">
+                                            <a class="add" href="shop-cart.html"><i
+                                                    class="fi-rs-shopping-cart mr-5"></i>Add
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                  @endforeach
+                    
+                        `;
+                    });
 
+                    // Display products in the productContainer div
+                    $('#data').html(rows);
+
+                    var countData = '<p>We found <strong class="text-brand">' +
+                        productsCount + '</strong> items for you!</p>'
+                    $('#targetElement').html(countData);
+
+                },
+                error: function(error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+
+
+
+        // Other event handlers for Update and Delete buttons
+    });
+</script>
+
+<!--end -->
+
+<!---price high to low  --->
+
+<script>
+    $(document).ready(function() {
+        // AJAX request on Get Items button click
+        $('#high-to-low').click(function() {
+            $('#withoutajax').hide();
+            $('#product-found').hide();
+            $('html, body').animate({
+                scrollTop: 260
+            }, 'slow');
+            var value = $(this).data('value');
+            $.ajax({
+                type: 'GET',
+                url: '/products/cat/high-to-low/' + value,
+                success: function(response) {
+                    // Handle the response (list of items)
+                    console.log(response);
+
+                    var productsCount = response.products.length;
+
+                    var rows = ""
+
+                    $.each(response.products, function(key, value) {
+
+                        var discountBadge = "";
+                        if (value.discount_percent === null) {
+                            discountBadge = '<span class="new">New</span>';
+                        } else {
+                            discountBadge = '<span class="hot">' + value
+                                .discount_percent + '%</span>';
+                        }
+
+                        var owner = ""
+
+                        if (value.vendor_id === null) {
+                            owner =
+                                '<span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>';
+                        } else {
+
+                            owner =
+                                '<span class="font-small text-muted">By <a href="vendor-details-1.html">' +
+                                value.vendor_name + '</a></span>';
+
+                        }
+
+                        var price = ""
+
+                        if (value.discount_price === null) {
+                            price = '<div class="product-price"><span>' + value
+                                .selling_price + '</span> </div>'
+                        } else {
+                            price = '<div class="product-price"> <span>' + value
+                                .discount_price +
+                                '</span> <span class="old-price">' + value
+                                .selling_price + '</span> </div>'
+                        }
+
+
+                        rows += `
+
+                        <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="shop-product-right.html">
+                                            <img class="default-img" src="/${value.product_image}"
+                                                alt="" />
+
+                                        </a>
+                                    </div>
+                                    <div class="product-action-1">
+                                        <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i
+                                                class="fi-rs-heart"></i></a>
+                                        <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
+                                                class="fi-rs-shuffle"></i></a>
+                                        <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
+                                            data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                    </div>
+
+                                    
+
+
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        ${discountBadge}
+                                    </div>
+
+                                </div>
+                                <div class="product-content-wrap">
+                                    <div class="product-category">
+                                        <a href="shop-grid-right.html">{{ $product->category->category_name }}</a>
+                                    </div>
+                                    <h2><a href="shop-product-right.html">${value.product_name}</a></h2>
+                                    <div class="product-rate-cover">
+                                        <div class="product-rate d-inline-block">
+                                            <div class="product-rating" style="width: 90%"></div>
+                                        </div>
+                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                    </div>
+
+                                    <div>
+
+                                        
+                                      ${owner}
+                                        
+                                    </div>
+                                    <div class="product-card-bottom">
+
+
+                                       ${price}
+
+
+                                        <div class="add-cart">
+                                            <a class="add" href="shop-cart.html"><i
+                                                    class="fi-rs-shopping-cart mr-5"></i>Add
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        `;
+                    });
+
+                    // Display products in the productContainer div
+                    $('#data').html(rows); 
+
+                    var countData = '<p>We found <strong class="text-brand">' +
+                        productsCount + '</strong> items for you!</p>'
+                    $('#targetElement').html(countData);
+
+                },
+                error: function(error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+
+
+
+        // Other event handlers for Update and Delete buttons
+    });
+</script>
+
+<!--end -->
+
+<!---filter featured  --->
+
+<script>
+    $(document).ready(function() {
+        // AJAX request on Get Items button click
+        $('#featured').click(function() {
+            $('#withoutajax').hide();
+            $('#product-found').hide();
+            $('html, body').animate({
+                scrollTop: 260
+            }, 'slow');
+            var value = $(this).data('value');
+            $.ajax({
+                type: 'GET',
+                url: '/products/cat/featured/' + value,
+                success: function(response) {
+                    // Handle the response (list of items)
+                    console.log(response);
+
+                    var productsCount = response.products.length;
+
+                    var rows = ""
+
+                    $.each(response.products, function(key, value) {
+
+                        var discountBadge = "";
+                        if (value.discount_percent === null) {
+                            discountBadge = '<span class="new">New</span>';
+                        } else {
+                            discountBadge = '<span class="hot">' + value
+                                .discount_percent + '%</span>';
+                        }
+
+                        var owner = ""
+
+                        if (value.vendor_id === null) {
+                            owner =
+                                '<span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>';
+                        } else {
+
+                            owner =
+                                '<span class="font-small text-muted">By <a href="vendor-details-1.html">' +
+                                value.vendor_name + '</a></span>';
+
+                        }
+
+                        var price = ""
+
+                        if (value.discount_price === null) {
+                            price = '<div class="product-price"><span>' + value
+                                .selling_price + '</span> </div>'
+                        } else {
+                            price = '<div class="product-price"> <span>' + value
+                                .discount_price +
+                                '</span> <span class="old-price">' + value
+                                .selling_price + '</span> </div>'
+                        }
+
+
+                        rows += `
+
+                        <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="shop-product-right.html">
+                                            <img class="default-img" src="/${value.product_image}"
+                                                alt="" />
+
+                                        </a>
+                                    </div>
+                                    <div class="product-action-1">
+                                        <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i
+                                                class="fi-rs-heart"></i></a>
+                                        <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
+                                                class="fi-rs-shuffle"></i></a>
+                                        <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
+                                            data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                    </div>
+
+                                    
+
+
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        ${discountBadge}
+                                    </div>
+
+                                </div>
+                                <div class="product-content-wrap">
+                                    <div class="product-category">
+                                        <a href="shop-grid-right.html">{{ $product->category->category_name }}</a>
+                                    </div>
+                                    <h2><a href="shop-product-right.html">${value.product_name}</a></h2>
+                                    <div class="product-rate-cover">
+                                        <div class="product-rate d-inline-block">
+                                            <div class="product-rating" style="width: 90%"></div>
+                                        </div>
+                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                    </div>
+
+                                    <div>
+
+                                        
+                                      ${owner}
+                                        
+                                    </div>
+                                    <div class="product-card-bottom">
+
+
+                                       ${price}
+
+
+                                        <div class="add-cart">
+                                            <a class="add" href="shop-cart.html"><i
+                                                    class="fi-rs-shopping-cart mr-5"></i>Add
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        `;
+                    });
+
+                    // Display products in the productContainer div
+                    $('#data').html(rows);
+
+                    var countData = '<p>We found <strong class="text-brand">' +
+                        productsCount + '</strong> items for you!</p>'
+                    $('#targetElement').html(countData);
+
+                },
+                error: function(error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+
+
+
+        // Other event handlers for Update and Delete buttons
+    });
+</script>
+
+<!--end -->
+
+<!---filter bar product -->
+
+<script>
+    $(document).ready(function() {
+
+        $('#price-filter').click(function() {
+
+            $('#withoutajax').hide();
+            $('#product-found').hide();
+            var value = $(this).data('value');
+
+            var minValueText = $("#slider-range-value1").text(); // Accessing text content using .text()
+            var maxValueText = $("#slider-range-value2").text();
+
+            var minValue = parseFloat(minValueText.replace('$', '').replace(/,/g, ''));
+            var maxValue = parseFloat(maxValueText.replace('$', '').replace(/,/g, ''));
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/products/cat/price-filter/' + value,
+                data: {
+                    minPrice: minValue,
+                    maxPrice: maxValue
+                },
+
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+
+                success: function(response) {
+                    // Handle the response (list of items)
+                    console.log(response);
+
+                    var productsCount = response.products.length;
+
+                    console.log(productsCount)
+
+                    var rows = ""
+
+                    $.each(response.products, function(key, value) {
+
+                        var discountBadge = "";
+                        if (value.discount_percent === null) {
+                            discountBadge = '<span class="new">New</span>';
+                        } else {
+                            discountBadge = '<span class="hot">' + value
+                                .discount_percent + '%</span>';
+                        }
+
+                        var owner = ""
+
+                        if (value.vendor_id === null) {
+                            owner =
+                                '<span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>';
+                        } else {
+
+                            owner =
+                                '<span class="font-small text-muted">By <a href="vendor-details-1.html">' +
+                                value.vendor_name + '</a></span>';
+
+                        }
+
+                        var price = ""
+
+                        if (value.discount_price === null) {
+                            price = '<div class="product-price"><span>' + value
+                                .selling_price + 'Tk</span> </div>'
+                        } else {
+                            price = '<div class="product-price"> <span>' + value
+                                .discount_price +
+                                'Tk</span> <span class="old-price">' + value
+                                .selling_price + 'Tk</span> </div>'
+                        }
+
+
+                        rows += `
+
+                        <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="shop-product-right.html">
+                                            <img class="default-img" src="/${value.product_image}"
+                                                alt="" />
+
+                                        </a>
+                                    </div>
+                                    <div class="product-action-1">
+                                        <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i
+                                                class="fi-rs-heart"></i></a>
+                                        <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
+                                                class="fi-rs-shuffle"></i></a>
+                                        <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
+                                            data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                    </div>
+
+                                    
+
+
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        ${discountBadge}
+                                    </div>
+
+                                </div>
+                                <div class="product-content-wrap">
+                                    <div class="product-category">
+                                        <a href="shop-grid-right.html">{{ $product->category->category_name }}</a>
+                                    </div>
+                                    <h2><a href="shop-product-right.html">${value.product_name}</a></h2>
+                                    <div class="product-rate-cover">
+                                        <div class="product-rate d-inline-block">
+                                            <div class="product-rating" style="width: 90%"></div>
+                                        </div>
+                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                    </div>
+
+                                    <div>
+
+                                        
+                                      ${owner}
+                                        
+                                    </div>
+                                    <div class="product-card-bottom">
+
+
+                                       ${price}
+
+
+                                        <div class="add-cart">
+                                            <a class="add" href="shop-cart.html"><i
+                                                    class="fi-rs-shopping-cart mr-5"></i>Add
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        `;
+                    });
+
+                    // Display products in the productContainer div
+                    $('#data').html(rows);
+
+                    var countData = '<p>We found <strong class="text-brand">' +
+                        productsCount + '</strong> items for you!</p>'
+                    $('#targetElement').html(countData);
+
+                },
+                error: function(error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+
+
+
+        })
+
+    });
+</script>
+
+<!--End -->
+
+<!---filter by brand -->
+<script>
+    $(document).ready(function() {
+        $('.brand-checkbox').change(function() {
+
+            $('#withoutajax').hide();
+            $('#product-found').hide();
+
+            var value = $('input[name="subcat"]').data('value');
+            console.log(value)
+            var selectedBrands = [];
+
+            $('.brand-checkbox:checked').each(function() {
+                selectedBrands.push($(this).val());
+            });
+
+            console.log(selectedBrands)
+
+            // Perform AJAX request with selected brand IDs
+            $.ajax({
+                type: 'POST',
+                url: '/products/cat/brand-filter/' + value,
+                data: {
+                    brand_ids: selectedBrands
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    console.log(response);
+
+                    var productsCount = response.products.length;
+
+                    console.log(productsCount)
+
+                    var rows = ""
+
+                    $.each(response.products, function(key, value) {
+
+                        var discountBadge = "";
+                        if (value.discount_percent === null) {
+                            discountBadge = '<span class="new">New</span>';
+                        } else {
+                            discountBadge = '<span class="hot">' + value
+                                .discount_percent + '%</span>';
+                        }
+
+                        var owner = ""
+
+                        if (value.vendor_id === null) {
+                            owner =
+                                '<span class="font-small text-muted">By <a href="vendor-details-1.html">Owner</a></span>';
+                        } else {
+
+                            owner =
+                                '<span class="font-small text-muted">By <a href="vendor-details-1.html">' +
+                                value.vendor_name + '</a></span>';
+
+                        }
+
+                        var price = ""
+
+                        if (value.discount_price === null) {
+                            price = '<div class="product-price"><span>' + value
+                                .selling_price + 'Tk</span> </div>'
+                        } else {
+                            price = '<div class="product-price"> <span>' + value
+                                .discount_price +
+                                'Tk</span> <span class="old-price">' + value
+                                .selling_price + 'Tk</span> </div>'
+                        }
+
+
+                        rows += `
+
+    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+        <div class="product-cart-wrap mb-30">
+            <div class="product-img-action-wrap">
+                <div class="product-img product-img-zoom">
+                    <a href="shop-product-right.html">
+                        <img class="default-img" src="/${value.product_image}"
+                            alt="" />
+
+                    </a>
                 </div>
-                <div class="banner-img wow fadeIn mb-lg-0 animated d-lg-block d-none">
-                    <img src="{{asset('Frontend/assets/imgs/banner/banner-11.png')}}" alt="" />
-                    <div class="banner-text">
-                        <span>Oganic</span>
-                        <h4>
-                            Save 17% <br />
-                            on <span class="text-brand">Oganic</span><br />
-                            Juice
-                        </h4>
+                <div class="product-action-1">
+                    <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i
+                            class="fi-rs-heart"></i></a>
+                    <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
+                            class="fi-rs-shuffle"></i></a>
+                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
+                        data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                </div>
+
+                
+
+
+                <div class="product-badges product-badges-position product-badges-mrg">
+                    ${discountBadge}
+                </div>
+
+            </div>
+            <div class="product-content-wrap">
+                <div class="product-category">
+                    <a href="shop-grid-right.html">{{ $product->category->category_name }}</a>
+                </div>
+                <h2><a href="shop-product-right.html">${value.product_name}</a></h2>
+                <div class="product-rate-cover">
+                    <div class="product-rate d-inline-block">
+                        <div class="product-rating" style="width: 90%"></div>
+                    </div>
+                    <span class="font-small ml-5 text-muted"> (4.0)</span>
+                </div>
+
+                <div>
+
+                    
+                  ${owner}
+                    
+                </div>
+                <div class="product-card-bottom">
+
+
+                   ${price}
+
+
+                    <div class="add-cart">
+                        <a class="add" href="shop-cart.html"><i
+                                class="fi-rs-shopping-cart mr-5"></i>Add
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
+
+   
+
+    `;
+                    });
+
+                    // Display products in the productContainer div
+                    $('#data').html(rows);
+
+                    var countData = '<p>We found <strong class="text-brand">' +
+                        productsCount + '</strong> items for you!</p>'
+                    $('#targetElement').html(countData);
+
+
+
+
+                },
+                error: function(error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>
+
+
+<!--end -->
 
 
 @endsection

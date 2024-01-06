@@ -5,12 +5,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
-
-
-
-
-
-
 @section('title')
     {{ $breadsubcat->category->category_name }} > {{ $breadsubcat->subcategory_name }} Subcategory
 @endsection

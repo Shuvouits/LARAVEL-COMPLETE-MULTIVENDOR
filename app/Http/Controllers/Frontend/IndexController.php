@@ -43,7 +43,8 @@ class IndexController extends Controller
         $categories = Category::orderBy('category_name','ASC')->get();
         $breadcat = Category::where('id',$id)->first();
         $newProduct = Product::orderBy('id','DESC')->limit(3)->get();
-        return view('frontend.product.category_view',compact('products','categories', 'breadcat', 'newProduct'));
+        $brands = Product::select('brand_id')->where('status', 1)->where('category_id', $id)->groupBy('brand_id')->get();
+        return view('frontend.product.category_view',compact('products','categories', 'breadcat', 'newProduct', 'id','brands'));
 
     }
 
@@ -191,6 +192,141 @@ class IndexController extends Controller
         $products = Product::where('subcategory_id', $id)->whereIn('brand_id', $brandIds)->get();
 
         $count = Product::where('subcategory_id', $id)->whereIn('brand_id', $brandIds)->count();
+        
+        $formattedProducts = [];
+        
+        foreach ($products as $product) {
+            $formattedProducts[] = [
+                'product_name' => $product->product_name,
+                'product_image' => $product->product_thambnail,
+                'product_category' => $product->category->category_name,
+                'vendor_name' => $product->vendor->name,
+                'selling_price' => $product->selling_price,
+                'discount_price' => $product->discount_price,
+                'discount_percent' => 100 - round(($product->discount_price * 100) / $product->selling_price),
+                'vendor_id' => $product->vendor_id,
+                'total_product' => $count,
+                // Add other product attributes as needed
+            ];
+        }
+
+        return response()->json(['products' => $formattedProducts]);
+
+    }
+
+    //category 
+
+    public function CFilterLowToHigh($id){
+        $products = Product::where('category_id', $id)->orderBy('selling_price', 'asc')->get();
+        $formattedProducts = [];
+        
+        foreach ($products as $product) {
+            $formattedProducts[] = [
+                'product_name' => $product->product_name,
+                'product_image' => $product->product_thambnail,
+                'product_category' => $product->category->category_name,
+                'vendor_name' => $product->vendor->name,
+                'selling_price' => $product->selling_price,
+                'discount_price' => $product->discount_price,
+                'discount_percent' => 100 - round(($product->discount_price * 100) / $product->selling_price),
+                'vendor_id' => $product->vendor_id,
+                // Add other product attributes as needed
+            ];
+        }
+
+        return response()->json(['products' => $formattedProducts]);
+
+    }   
+
+    public function CFilterHighToLow($id){
+        $products = Product::where('category_id', $id)->orderBy('selling_price', 'desc')->get();
+
+        //return response()->json(['products' => $products]);
+        $formattedProducts = [];
+        
+        foreach ($products as $product) {
+            $formattedProducts[] = [
+                'product_name' => $product->product_name,
+                'product_image' => $product->product_thambnail,
+                'product_category' => $product->category->category_name,
+                'vendor_name' => $product->vendor->name,
+                'selling_price' => $product->selling_price,
+                'discount_price' => $product->discount_price,
+                'discount_percent' => 100 - round(($product->discount_price * 100) / $product->selling_price),
+                'vendor_id' => $product->vendor_id,
+                // Add other product attributes as needed
+            ];
+        }
+
+        return response()->json(['products' => $formattedProducts]);
+
+    }  
+
+    public function CFeatured($id){
+        $products = Product::where('category_id', $id)->where('featured', 1)->orderBy('id', 'desc')->get();
+
+        $count = Product::where('category_id', $id)->where('featured', 1)->orderBy('id', 'desc')->count();
+
+        //return response()->json(['products' => $products]);
+        $formattedProducts = [];
+        
+        foreach ($products as $product) {
+            $formattedProducts[] = [
+                'product_name' => $product->product_name,
+                'product_image' => $product->product_thambnail,
+                'product_category' => $product->category->category_name,
+                'vendor_name' => $product->vendor->name,
+                'selling_price' => $product->selling_price,
+                'discount_price' => $product->discount_price,
+                'discount_percent' => 100 - round(($product->discount_price * 100) / $product->selling_price),
+                'vendor_id' => $product->vendor_id,
+                'total_product' => $count,
+                // Add other product attributes as needed
+            ];
+        }
+
+        return response()->json(['products' => $formattedProducts]);
+
+    }  
+
+    public function CPriceFilter(Request $request, $id){
+
+        $minPrice = $request->input('minPrice');
+        $maxPrice = $request->input('maxPrice');
+
+        
+        $products = Product::where('category_id', $id)->whereBetween('discount_price', [$minPrice, $maxPrice])->get();
+
+        $count = Product::where('category_id', $id)->whereBetween('discount_price', [$minPrice, $maxPrice])->count();
+        
+        $formattedProducts = [];
+        
+        foreach ($products as $product) {
+            $formattedProducts[] = [
+                'product_name' => $product->product_name,
+                'product_image' => $product->product_thambnail,
+                'product_category' => $product->category->category_name,
+                'vendor_name' => $product->vendor->name,
+                'selling_price' => $product->selling_price,
+                'discount_price' => $product->discount_price,
+                'discount_percent' => 100 - round(($product->discount_price * 100) / $product->selling_price),
+                'vendor_id' => $product->vendor_id,
+                'total_product' => $count,
+                // Add other product attributes as needed
+            ];
+        }
+
+        return response()->json(['products' => $formattedProducts]);
+
+    } 
+
+    public function CBrandFilter(Request $request, $id){
+
+        $brandIds = $request->input('brand_ids');
+
+        $products = Product::where('category_id', $id)->whereIn('brand_id', $brandIds)->get();
+
+        $count = Product::where('category_id', $id)->whereIn('brand_id', $brandIds)->count();
         
         $formattedProducts = [];
         
