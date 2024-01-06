@@ -34,12 +34,12 @@
                     @foreach($hot_deals as $product)
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="shop-product-right.html"><img src="{{asset($product->product_thambnail)}}"
+                            <a href="/product/details/{{$product->product_slug}}"><img src="{{asset($product->product_thambnail)}}"
                                     alt="" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
-                                <a href="shop-product-right.html">{{$product->product_name}}</a>
+                                <a href="/product/details/{{$product->product_slug}}">{{$product->product_name}}</a>
                             </h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
@@ -112,12 +112,12 @@
                     @foreach($special_offer as $product)
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="shop-product-right.html"><img src="{{asset($product->product_thambnail)}}"
+                            <a href="/product/details/{{$product->product_slug}}"><img src="{{asset($product->product_thambnail)}}"
                                     alt="" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
-                                <a href="shop-product-right.html">{{$product->product_name}}</a>
+                                <a href="/product/details/{{$product->product_slug}}">{{$product->product_name}}</a>
                             </h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
@@ -193,12 +193,12 @@
                     @foreach($recent_add as $product)
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="shop-product-right.html"><img src="{{asset($product->product_thambnail)}}"
+                            <a href="/product/details/{{$product->product_slug}}"><img src="{{asset($product->product_thambnail)}}"
                                     alt="" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
-                                <a href="shop-product-right.html">{{$product->product_name}}</a>
+                                <a href="/product/details/{{$product->product_slug}}">{{$product->product_name}}</a>
                             </h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
@@ -274,12 +274,12 @@
                     @foreach($special_deals as $product)
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="shop-product-right.html"><img src="{{asset($product->product_thambnail)}}"
+                            <a href="/product/details/{{$product->product_slug}}"><img src="{{asset($product->product_thambnail)}}"
                                     alt="" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
-                                <a href="shop-product-right.html">{{$product->product_name}}</a>
+                                <a href="/product/details/{{$product->product_slug}}">{{$product->product_name}}</a>
                             </h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
@@ -374,7 +374,7 @@ $all_vendor = \App\Models\User::where('role', 'vendor')->where('status', 'active
                 <div class="vendor-img-action-wrap">
                     <div class="vendor-img">
                         @if($data->photo == null)
-                        <a href="vendor-details-1.html">
+                        <a href="/vendor/details/{{$data->id}}">
                             <img class="default-img" style="border-radius: 50px; width : 100px; height : 100px; border : 3px solid gainsboro"  src="{{asset('AdminBackend/no_image.jpg')}}"
                                 alt="" />
                         </a>
@@ -382,7 +382,7 @@ $all_vendor = \App\Models\User::where('role', 'vendor')->where('status', 'active
 
                         @if($data->photo == !null)
 
-                        <a href="vendor-details-1.html">
+                        <a href="/vendor/details/{{$data->id}}">
                             <img class="default-img" style="border-radius: 10px; width : 100px; height : 100px; "  src="{{asset('AdminBackend/upload/vendor_image/'.$data->photo)}}"
                                 alt="" />
                         </a>
@@ -400,7 +400,7 @@ $all_vendor = \App\Models\User::where('role', 'vendor')->where('status', 'active
                             <div class="product-category">
                                 <span class="text-muted">Since 2012</span>
                             </div>
-                            <h4 class="mb-5"><a href="vendor-details-1.html">{{$data->name}}</a></h4>
+                            <h4 class="mb-5"><a href="/vendor/details/{{$data->id}}">{{$data->name}}</a></h4>
                             <div class="product-rate-cover">
 
                                 @php 

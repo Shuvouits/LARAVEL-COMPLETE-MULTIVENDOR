@@ -34,20 +34,22 @@
                                         data-wow-delay=".1s">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
-                                                <a href="shop-product-right.html">
+                                                <a href="/product/details/{{ $product->id }}/{{ $product->product_slug }}">
                                                     <img class="default-img"
                                                         src="{{ asset($product->product_thambnail) }}" alt="" />
 
                                                 </a>
                                             </div>
+
                                             <div class="product-action-1">
-                                                <a aria-label="Add To Wishlist" class="action-btn"
-                                                    href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
+                                                <a aria-label="Add To Wishlist" class="action-btn"  id="{{ $product->id }}" onclick="addToWishList(this.id)"><i
+                                                        class="fi-rs-heart"></i></a>
+                                                <a aria-label="Compare" class="action-btn"   id="{{ $product->id }}" onclick="addToCompare(this.id)"><i
                                                         class="fi-rs-shuffle"></i></a>
                                                 <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                                    data-bs-target="#quickViewModal{{$product->id}}"><i class="fi-rs-eye"></i></a>
                                             </div>
+
 
                                             @php
                                                 $amount = $product->selling_price - $product->discount_price;
@@ -67,7 +69,7 @@
                                         </div>
                                         <div class="product-content-wrap">
                                             <div class="product-category">
-                                                <a href="#">{{ $item->category_name }}</a>
+                                                <a href="/product/category/{{$product->category_id}}/{{$product->category->category_slug}}">{{ $item->category_name }}</a>
                                             </div>
                                             <h2><a
                                                     href="/product/details/{{ $product->id }}/{{ $product->product_slug }}">{{ $product->product_name }}
@@ -105,7 +107,7 @@
                                             </div>
                                             <div>
                                                 <span class="font-small text-muted">By <a
-                                                        href="vendor-details-1.html">{{ $product->vendor->name }}</a></span>
+                                                        href="/vendor/details/{{$product->vendor_id}}">{{ $product->vendor->name }}</a></span>
                                             </div>
                                             <div class="product-card-bottom">
 
@@ -127,7 +129,7 @@
 
 
                                                 <div class="add-cart">
-                                                    <a class="add" href="shop-cart.html"><i
+                                                    <a class="add" href="/product/details/{{ $product->id }}/{{ $product->product_slug }}"><i
                                                             class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                 </div>
                                             </div>

@@ -16,7 +16,7 @@
                 <div class="banner-img style-2">
                     <div class="banner-text">
                         <h2 class="mb-100">Bring nature into your home</h2>
-                        <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i
+                        <a href="#" class="btn btn-xs">Shop Now <i
                                 class="fi-rs-arrow-small-right"></i></a>
                     </div>
                 </div>
@@ -39,15 +39,16 @@
 
                                                 </a>
                                             </div>
+                                            
                                             <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn small hover-up"
-                                                    data-bs-toggle="modal" data-bs-target="#quickViewModal"> <i
-                                                        class="fi-rs-eye"></i></a>
-                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                    href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn small hover-up"
-                                                    href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                                <a aria-label="Add To Wishlist" class="action-btn"  id="{{ $product->id }}" onclick="addToWishList(this.id)"><i
+                                                        class="fi-rs-heart"></i></a>
+                                                <a aria-label="Compare" class="action-btn"   id="{{ $product->id }}" onclick="addToCompare(this.id)"><i
+                                                        class="fi-rs-shuffle"></i></a>
+                                                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#quickViewModal{{$product->id}}"><i class="fi-rs-eye"></i></a>
                                             </div>
+                                            
 
                                             @php
                                                 $amount = $product->selling_price - $product->discount_price;
@@ -65,7 +66,7 @@
                                         </div>
                                         <div class="product-content-wrap">
                                             <div class="product-category">
-                                                <a href="shop-grid-right.html">{{$product->category->category_name}}</a>
+                                                <a href="/product/category/{{$product->category_id}}/{{$product->category->category_slug}}">{{$product->category->category_name}}</a>
                                             </div>
                                             <h2><a
                                                     href="/product/details/{{ $product->id }}/{{ $product->product_slug }}">{{ $product->product_name }}</a>
@@ -122,7 +123,7 @@
                                                 </div>
                                                 <span class="font-xs text-heading"> Sold: 90/120</span>
                                             </div>
-                                            <a href="shop-cart.html" class="btn w-100 hover-up"><i
+                                            <a href="/product/details/{{ $product->id }}/{{ $product->product_slug }}" class="btn w-100 hover-up"><i
                                                     class="fi-rs-shopping-cart mr-5"></i>Add To Cart</a>
                                         </div>
                                     </div>

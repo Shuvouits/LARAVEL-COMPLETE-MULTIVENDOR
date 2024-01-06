@@ -46,7 +46,7 @@
                                 data-wow-delay=".1s">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="shop-product-right.html">
+                                        <a href="/product/details/{{ $product->id }}/{{ $product->product_slug }}">
                                             <img class="default-img" src="{{ asset($product->product_thambnail) }}"
                                                 alt="" />
                                            
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="shop-grid-right.html">{{ $product['category']['category_name'] }}</a>
+                                        <a href="/product/category/{{$product->category_id}}/{{$product->category->category_slug}}">{{ $product['category']['category_name'] }}</a>
                                     </div>
                                     <h2><a
                                             href="/product/details/{{ $product->id }}/{{ $product->product_slug }}">{{ $product->product_name }}</a>
@@ -122,7 +122,7 @@
                                                     href="vendor-details-1.html">Owner</a></span>
                                         @else
                                             <span class="font-small text-muted">By <a
-                                                    href="vendor-details-1.html">{{ $product['vendor']['name'] }}</a></span>
+                                                    href="/vendor/details/{{$product->vendor_id}}">{{ $product['vendor']['name'] }}</a></span>
                                         @endif
                                     </div>
                                     <div class="product-card-bottom">
@@ -137,7 +137,7 @@
                                         @endif
 
                                         <div class="add-cart">
-                                            <a class="add" href="shop-cart.html"><i
+                                            <a class="add" href="/product/details/{{ $product->id }}/{{ $product->product_slug }}"><i
                                                     class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                         </div>
                                     </div>
