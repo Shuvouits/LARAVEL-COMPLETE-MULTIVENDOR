@@ -53,6 +53,16 @@ Route::get("/vendor/all/", [IndexController::class, 'AllVendor']);
 Route::get('/product/category/{id}/{slug}', [IndexController::class, 'CatWiseProduct']);
 Route::get('/product/sub-category/{id}/{slug}', [IndexController::class, 'SubCatWiseProduct']);
 
+//product-filter-subcategory
+Route::get('/products/subcat/low-to-high/{id}', [IndexController::class, 'FilterLowToHigh']);  //Ajax
+Route::get('/products/subcat/high-to-low/{id}', [IndexController::class, 'FilterHighToLow']);
+Route::get('/products/subcat/featured/{id}', [IndexController::class, 'Featured']);
+Route::post('/products/subcat/price-filter/{id}', [IndexController::class, 'PriceFilter']);
+Route::post('/products/subcat/brand-filter/{id}', [IndexController::class, 'BrandFilter']);
+
+
+//end
+
 //Blog
 
 Route::get('/blog' , [BlogController::class, 'AllBlog']);

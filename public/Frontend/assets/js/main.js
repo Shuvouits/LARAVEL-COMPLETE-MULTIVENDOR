@@ -52,11 +52,11 @@
             prefix: "$"
         });
         noUiSlider.create(rangeSlider, {
-            start: [500, 1000],
+            start: [500, 80000],
             step: 1,
             range: {
                 min: [0],
-                max: [2000]
+                max: [100000]
             },
             format: moneyFormat,
             connect: true

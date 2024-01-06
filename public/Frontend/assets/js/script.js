@@ -7,7 +7,8 @@ $("body").on("keyup", "#search", function () {
     if (text.length > 0) {
         $.ajax({
             data: { search: text },
-            url: site_url + "search-product",
+            //url: site_url + "search-product",
+            url : '/search-product',
             method: 'post',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
