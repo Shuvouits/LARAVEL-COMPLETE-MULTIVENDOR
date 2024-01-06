@@ -344,7 +344,7 @@
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="shop-grid-right.html">{{ $product->category->category_name }}</a>
+                                        <a href="shop-grid-right.html"> ${value.product_category}</a>
                                     </div>
                                     <h2><a href="shop-product-right.html">${value.product_name}</a></h2>
                                     <div class="product-rate-cover">
@@ -492,7 +492,7 @@
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="shop-grid-right.html">{{ $product->category->category_name }}</a>
+                                        <a href="shop-grid-right.html"> ${value.product_category}</a>
                                     </div>
                                     <h2><a href="shop-product-right.html">${value.product_name}</a></h2>
                                     <div class="product-rate-cover">
@@ -640,7 +640,7 @@
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="shop-grid-right.html">{{ $product->category->category_name }}</a>
+                                        <a href="shop-grid-right.html"> ${value.product_category}</a>
                                     </div>
                                     <h2><a href="shop-product-right.html">${value.product_name}</a></h2>
                                     <div class="product-rate-cover">
@@ -806,7 +806,7 @@
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="shop-grid-right.html">{{ $product->category->category_name }}</a>
+                                        <a href="shop-grid-right.html"> ${value.product_category}</a>
                                     </div>
                                     <h2><a href="shop-product-right.html">${value.product_name}</a></h2>
                                     <div class="product-rate-cover">
@@ -968,7 +968,7 @@
             </div>
             <div class="product-content-wrap">
                 <div class="product-category">
-                    <a href="shop-grid-right.html">{{ $product->category->category_name }}</a>
+                    <a href="shop-grid-right.html"> ${value.product_category}</a>
                 </div>
                 <h2><a href="shop-product-right.html">${value.product_name}</a></h2>
                 <div class="product-rate-cover">
