@@ -32,7 +32,7 @@
                         <thead>
                             <tr>
                                 <th>Sl</th>
-                                <th>Slider Title </th>
+                                <th>Slider Url </th>
                                 <th>Short Title </th>
                                 <th>Slider Image </th>
                                 <th>Action</th>

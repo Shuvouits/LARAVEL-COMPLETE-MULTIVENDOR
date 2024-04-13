@@ -10,7 +10,7 @@
     <section class="product-tabs section-padding position-relative">
         <div class="container">
             <div class="section-title style-2 wow animate__animated animate__fadeIn">
-                <h3>{{ $item->category_name }} Category </h3>
+                <h3>{{ $item->category_name }}</h3>
 
             </div>
             <!--End nav-tabs-->
@@ -20,8 +20,8 @@
 
                         @php
                             $all_product = \App\Models\Product::where('category_id', $item->id)
-                                ->orderBy('id', 'DESC')
-                                ->limit(5)
+                                ->inRandomOrder()
+                                ->limit(15)
                                 ->get();
 
                         @endphp
@@ -71,9 +71,12 @@
                                             <div class="product-category">
                                                 <a href="/product/category/{{$product->category_id}}/{{$product->category->category_slug}}">{{ $item->category_name }}</a>
                                             </div>
-                                            <h2><a
-                                                    href="/product/details/{{ $product->id }}/{{ $product->product_slug }}">{{ $product->product_name }}
-                                                </a></h2>
+                                            
+                                                
+                                                <h2><a href="/product/details/{{ $product->id }}/{{ $product->product_slug }}">{{ \Illuminate\Support\Str::limit($product->product_name, 50) }}</a></h2>
+
+                                            
+                                            
                                             <div class="product-rate-cover">
                                                 <div class="product-rate d-inline-block">
 

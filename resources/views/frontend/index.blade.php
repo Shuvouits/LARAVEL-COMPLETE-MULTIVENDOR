@@ -4,7 +4,7 @@
 
 
 @section('title')
-    Home Easy Multi Vendor Shop 
+    Home Professional Multi Vendor Shop 
 @endsection
 
 @include('frontend.home.home_slider')
@@ -34,12 +34,12 @@
                     @foreach($hot_deals as $product)
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="/product/details/{{$product->product_slug}}"><img src="{{asset($product->product_thambnail)}}"
+                            <a href="/product/details/{{$product->id}}/{{$product->product_slug}}"><img src="{{asset($product->product_thambnail)}}"
                                     alt="" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
-                                <a href="/product/details/{{$product->product_slug}}">{{$product->product_name}}</a>
+                                <a href="/product/details/{{$product->id}}/{{$product->product_slug}}">{{$product->product_name}}</a>
                             </h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
@@ -112,12 +112,12 @@
                     @foreach($special_offer as $product)
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="/product/details/{{$product->product_slug}}"><img src="{{asset($product->product_thambnail)}}"
+                            <a href="/product/details/{{$product->id}}/{{$product->product_slug}}"><img src="{{asset($product->product_thambnail)}}"
                                     alt="" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
-                                <a href="/product/details/{{$product->product_slug}}">{{$product->product_name}}</a>
+                                <a href="/product/details/{{$product->id}}/{{$product->product_slug}}">{{$product->product_name}}</a>
                             </h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
@@ -193,12 +193,12 @@
                     @foreach($recent_add as $product)
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="/product/details/{{$product->product_slug}}"><img src="{{asset($product->product_thambnail)}}"
+                            <a href="/product/details/{{$product->id}}/{{$product->product_slug}}"><img src="{{asset($product->product_thambnail)}}"
                                     alt="" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
-                                <a href="/product/details/{{$product->product_slug}}">{{$product->product_name}}</a>
+                                <a href="/product/details/{{$product->id}}/{{$product->product_slug}}">{{$product->product_name}}</a>
                             </h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
@@ -274,12 +274,12 @@
                     @foreach($special_deals as $product)
                     <article class="row align-items-center hover-up">
                         <figure class="col-md-4 mb-0">
-                            <a href="/product/details/{{$product->product_slug}}"><img src="{{asset($product->product_thambnail)}}"
+                            <a href="/product/details/{{$product->id}}/{{$product->product_slug}}"><img src="{{asset($product->product_thambnail)}}"
                                     alt="" /></a>
                         </figure>
                         <div class="col-md-8 mb-0">
                             <h6>
-                                <a href="/product/details/{{$product->product_slug}}">{{$product->product_name}}</a>
+                                <a href="/product/details/{{$product->id}}/{{$product->product_slug}}">{{$product->product_name}}</a>
                             </h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">

@@ -12,9 +12,8 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> <a href="shop-grid-right.html">Vegetables & tubers</a> <span></span> Seeds of Change
-                    Organic
+                    <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <span></span> <a href="/product/category/{{$product->category->id}}/{{$product->category->category_slug}}">{{$product->category->category_name}}</a> <span></span> {{$product->subcategory->subcategory_name}}
                 </div>
             </div>
         </div>
@@ -584,13 +583,11 @@
                                             <div class="product-cart-wrap hover-up">
                                                 <div class="product-img-action-wrap">
                                                     <div class="product-img product-img-zoom">
-                                                        <a href="shop-product-right.html" tabindex="0">
+                                                        <a href="/product/details/{{$item->id}}/{{$item->product_slug}}" tabindex="0">
                                                             <img class="default-img"
                                                                 src="{{ asset($item->product_thambnail) }}"
                                                                 alt="" />
-                                                            <img class="hover-img"
-                                                                src="{{ asset('Frontend/assets/imgs/shop/product-2-2.jpg') }}"
-                                                                alt="" />
+                                                            
                                                         </a>
                                                     </div>
                                                     <div class="product-action-1">
@@ -622,7 +619,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="product-content-wrap">
-                                                    <h2><a href="shop-product-right.html"
+                                                    <h2><a href="/product/details/{{$item->id}}/{{$item->product_slug}}"
                                                             tabindex="0">{{ $item->product_name }}</a></h2>
                                                     <div class="rating-result" title="90%">
                                                         <span> </span>

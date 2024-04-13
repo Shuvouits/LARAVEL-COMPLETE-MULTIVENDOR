@@ -82,7 +82,7 @@
                                         <a href="/product/category/{{$product->category_id}}/{{$product->category->category_slug}}">{{ $product['category']['category_name'] }}</a>
                                     </div>
                                     <h2><a
-                                            href="/product/details/{{ $product->id }}/{{ $product->product_slug }}">{{ $product->product_name }}</a>
+                                            href="/product/details/{{ $product->id }}/{{ $product->product_slug }}">{{ \Illuminate\Support\Str::limit($product->product_name, 80) }}</a>
                                     </h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">

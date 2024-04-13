@@ -84,7 +84,7 @@
                                 </ul>
                             </li>
 
-                            <li>Need help? Call Us: <strong class="text-brand"> + 1800 900</strong></li>
+                            <li>Need help? Call Us: <strong class="text-brand"> + 8801751720590</strong></li>
 
                         </ul>
                     </div>
@@ -102,20 +102,26 @@
                 <div class="header-right">
                     <div class="search-style-2">
 
+                        @php
+                            $all_category = App\Models\Category::all();
+                        @endphp
+
                         <form action="/product/search" method="post">
                             {{ @csrf_field() }}
                             <select class="select-active">
-                                <option>All Categories</option>
-                                <option>Milks and Dairies</option>
-                                <option>Wines & Alcohol</option>
-                                <option>Clothing & Beauty</option>
-                                <option>Pet Foods & Toy</option>
-                                <option>Fast food</option>
-                                <option>Baking material</option>
-                                <option>Vegetables</option>
-                                <option>Fresh Seafood</option>
-                                <option>Noodles & Rice</option>
-                                <option>Ice cream</option>
+
+                                <option selected disabled value="">All Categories</option>
+
+
+                                @foreach ($all_category as $data)
+                                <option>
+                                    <a href="/product/category/{{$data->id}}/{{$data->category_slug}}">{{$data->category_name}}</a>
+                                </option>
+                            @endforeach
+                            
+
+
+
                             </select>
 
                             <input onfocus="search_result_show()" onblur="search_result_hide()" name="search"
@@ -303,8 +309,9 @@
 
                                     @foreach ($all_category as $item)
                                         <li>
-                                            <a href="/product/category/{{$item->id}}/{{$item->category_name}}"> <img
-                                                    src="{{ asset($item->category_image) }}"
+                                            <a
+                                                href="/product/category/{{ $item->id }}/{{ $item->category_name }}">
+                                                <img src="{{ asset($item->category_image) }}"
                                                     alt="" />{{ $item->category_name }}</a>
                                         </li>
                                     @endforeach
@@ -315,8 +322,9 @@
 
                                     @foreach ($left_all_category as $item)
                                         <li>
-                                            <a href="/product/category/{{$item->id}}/{{$item->category_name}}"> <img
-                                                    src="{{ asset($item->category_image) }}"
+                                            <a
+                                                href="/product/category/{{ $item->id }}/{{ $item->category_name }}">
+                                                <img src="{{ asset($item->category_image) }}"
                                                     alt="" />{{ $item->category_name }}</a>
                                         </li>
                                     @endforeach
@@ -335,7 +343,7 @@
 
 
 
-                            
+
 
                         </div>
                     </div>
@@ -343,13 +351,9 @@
 
                     @php
 
-                        $category_without_sub = App\Models\Category::where('sub_category', null)
-                            ->limit(4)
-                            ->get();
+                        $category_without_sub = App\Models\Category::where('sub_category', null)->limit(4)->get();
 
-                        $category_with_sub = App\Models\Category::where('sub_category', 'yes')
-                            ->limit(5)
-                            ->get();
+                        $category_with_sub = App\Models\Category::where('sub_category', 'yes')->limit(5)->get();
                         $all_subcategory = App\Models\SubCategory::all();
 
                     @endphp

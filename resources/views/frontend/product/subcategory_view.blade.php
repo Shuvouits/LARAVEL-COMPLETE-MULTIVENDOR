@@ -19,7 +19,7 @@
                     <div class="col-xl-3">
                         <h1 class="mb-15">{{ $breadsubcat->subcategory_name }}</h1>
                         <div class="breadcrumb">
-                            <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                            <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
 
                             <span style="color : red"> {{ $breadsubcat->category->category_name }} </span> <span>
                                 {{ $breadsubcat->subcategory_name }} </span>
@@ -111,7 +111,7 @@
                                     <div class="product-category">
                                         <a href="shop-grid-right.html">{{ $product->category->category_name }}</a>
                                     </div>
-                                    <h2><a href="shop-product-right.html">{{ $product->product_name }}</a></h2>
+                                    <h2><a href="/product/details/{{$product->id}}/{{$product->product_slug}}"> {{ \Illuminate\Support\Str::limit($product->product_name, 70) }} </a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
@@ -129,6 +129,7 @@
                                                     href="vendor-details-1.html">{{ $product->vendor->name }}</a></span>
                                         @endif
                                     </div>
+
                                     <div class="product-card-bottom">
 
 
@@ -820,9 +821,9 @@
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="shop-grid-right.html">{{ $product->category->category_name }}</a>
+                                        <a href="shop-grid-right.html"> ${value.product_category}</a>
                                     </div>
-                                    <h2><a href="shop-product-right.html">${value.product_name}</a></h2>
+                                    <h2><a href="#">${value.product_name}</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
@@ -850,7 +851,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
+
+
+ 
                     
                         `;
                     });

@@ -2,11 +2,11 @@
 
 @section('main')
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
 @section('title')
-   {{ $breadcat->category_name }} Category
+    {{ $breadcat->category_name }} Category
 @endsection
 
 <main class="main">
@@ -15,10 +15,10 @@
             <div class="archive-header">
                 <div class="row align-items-center">
                     <div class="col-xl-3">
-                        <h1 class="mb-15">{{$breadcat->category_name}} {{$breadcat->subcategory_name}}</h1>
+                        <h1 class="mb-15">{{ $breadcat->category_name }} {{ $breadcat->subcategory_name }}</h1>
                         <div class="breadcrumb">
-                            <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                            <span></span>{{$breadcat->category_name}}   {{$breadcat->subcategory_name}}
+                            <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                            <span></span>{{ $breadcat->category_name }} {{ $breadcat->subcategory_name }}
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
 
                     <div class="sort-by-product-area">
                         <div class="sort-by-cover mr-10">
-                           
+
                         </div>
 
                         <div class="sort-by-cover">
@@ -68,108 +68,113 @@
                     </div>
                 </div>
 
-                <div class="row product-grid"  id="withoutajax">
+                <div class="row product-grid" id="withoutajax">
 
-                    @foreach($products as $product)
-                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                        <div class="product-cart-wrap mb-30">
-                            <div class="product-img-action-wrap">
-                                <div class="product-img product-img-zoom">
-                                    <a href="shop-product-right.html">
-                                        <img class="default-img" src="{{asset($product->product_thambnail)}}" alt="" />
-                                        <img class="hover-img" src="assets/imgs/shop/product-1-2.jpg" alt="" />
-                                    </a>
-                                </div>
-                                <div class="product-action-1">
-                                    <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i
-                                            class="fi-rs-heart"></i></a>
-                                    <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
-                                            class="fi-rs-shuffle"></i></a>
-                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
-                                        data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                </div>
+                    @foreach ($products as $product)
+                        <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="/product/details/{{ $product->id }}/{{ $product->product_slug }}">
+                                            <img class="default-img" src="{{ asset($product->product_thambnail) }}"
+                                                alt="" />
 
-                                @php
-                                $amount = $product->selling_price - $product->discount_price;
-                                $discount = ($amount/$product->selling_price) * 100;
-                                @endphp
-
-
-                                <div class="product-badges product-badges-position product-badges-mrg">
-                                    @if($product->discount_price == NULL)
-                                    <span class="new">New</span>
-                                    @else
-                                    <span class="hot"> {{ round($discount) }} %</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="product-content-wrap">
-                                <div class="product-category">
-                                    <a href="shop-grid-right.html">{{$product->category->category_name}}</a>
-                                </div>
-                                <h2><a href="shop-product-right.html">{{$product->product_name}}</a></h2>
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                                <div>
-
-                                    @if($product->vendor_id == NULL)
-                                    <span class="font-small text-muted">By <a
-                                            href="vendor-details-1.html">Owner</a></span>
-                                    @else
-                                    <span class="font-small text-muted">By <a
-                                            href="vendor-details-1.html">{{ $product->vendor->name }}</a></span>
-
-                                    @endif
-                                </div>
-                                <div class="product-card-bottom">
-
-
-                                    @if($product->discount_price == NULL)
-                                    <div class="product-price">
-                                        <span>${{ $product->selling_price }}</span>
-
-                                    </div>
-
-                                    @else
-                                    <div class="product-price">
-                                        <span>${{ $product->discount_price }}</span>
-                                        <span class="old-price">${{ $product->selling_price }}</span>
-                                    </div>
-                                    @endif
-
-
-                                    <div class="add-cart">
-                                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add
                                         </a>
+                                    </div>
+
+                                    <div class="product-action-1">
+                                        <a aria-label="Add To Wishlist" class="action-btn" id="{{ $product->id }}"
+                                            onclick="addToWishList(this.id)"><i class="fi-rs-heart"></i></a>
+                                        <a aria-label="Compare" class="action-btn" id="{{ $product->id }}"
+                                            onclick="addToCompare(this.id)"><i class="fi-rs-shuffle"></i></a>
+                                        <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
+                                            data-bs-target="#quickViewModal{{ $product->id }}"><i
+                                                class="fi-rs-eye"></i></a>
+                                    </div>
+
+
+                                    @php
+                                        $amount = $product->selling_price - $product->discount_price;
+                                        $discount = ($amount / $product->selling_price) * 100;
+                                    @endphp
+
+
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        @if ($product->discount_price == null)
+                                            <span class="new">New</span>
+                                        @else
+                                            <span class="hot"> {{ round($discount) }} %</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <div class="product-category">
+                                        <a
+                                            href="/product/category/{{ $product->category_id }}/{{ $product->category->category_slug }}">{{ $product->category->category_name }}</a>
+                                    </div>
+                                    <h2><a href="/product/details/{{ $product->id }}/{{ $product->product_slug }}">
+                                            {{ \Illuminate\Support\Str::limit($product->product_name, 70) }} </a></h2>
+                                    <div class="product-rate-cover">
+                                        <div class="product-rate d-inline-block">
+                                            <div class="product-rating" style="width: 90%"></div>
+                                        </div>
+                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                    </div>
+                                    <div>
+
+                                        @if ($product->vendor_id == null)
+                                            <span class="font-small text-muted">By <a href="#">Owner</a></span>
+                                        @else
+                                            <span class="font-small text-muted">By <a
+                                                    href="/vendor/details/{{ $product->vendor->id }}">{{ $product->vendor->name }}</a></span>
+                                        @endif
+                                    </div>
+                                    <div class="product-card-bottom">
+
+
+                                        @if ($product->discount_price == null)
+                                            <div class="product-price">
+                                                <span>${{ $product->selling_price }}</span>
+
+                                            </div>
+                                        @else
+                                            <div class="product-price">
+                                                <span>${{ $product->discount_price }}</span>
+                                                <span class="old-price">${{ $product->selling_price }}</span>
+                                            </div>
+                                        @endif
+
+
+                                        <div class="add-cart">
+                                            <a class="add"
+                                                href="/product/details/{{ $product->id }}/{{ $product->product_slug }}"><i
+                                                    class="fi-rs-shopping-cart mr-5"></i>Add
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                     <!--end product card-->
 
                 </div>
 
-                 <!-- Ajax filter -->
+                <!-- Ajax filter -->
 
-                 <div id="data" class="row product-grid">
+                <div id="data" class="row product-grid">
 
 
-                 </div>
-                 <!--end Ajax product card-->
-               
+                </div>
+                <!--end Ajax product card-->
+
 
 
             </div>
             <div class="col-lg-1-5 primary-sidebar sticky-sidebar">
 
-                 <!-- Fillter By Price -->
-                 <div class="sidebar-widget price_range range mb-30">
+                <!-- Fillter By Price -->
+                <div class="sidebar-widget price_range range mb-30">
                     <h5 class="section-title style-1 mb-30">Fill by price</h5>
 
                     <div class="price-filter">
@@ -188,8 +193,9 @@
                     <br>
                     <a href="#" id="price-filter" data-value="{{ $id }}"
                         class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
-                        Fillter</a>
-                </div> 
+                        Fillter
+                    </a>
+                </div>
 
                 <!-- Fillter By Brand -->
                 <div class="list-group">
@@ -202,8 +208,8 @@
                                     id="exampleCheckbox{{ $loop->index + 1 }}" name="brands[]"
                                     value="{{ $item->brand->id }}" />
                                 <label class="form-check-label"
-                                    for="exampleCheckbox{{ $loop->index + 1 }}"><span>{{ $item->brand->brand_name }}
-                                        {{ $item->brand->id }}</span></label>
+                                    for="exampleCheckbox{{ $loop->index + 1 }}"><span>{{ $item->brand->brand_name }}</span>
+                                        <span style="margin-left: 2px;   font-weight: bold; color : #3bb77e  ">{{ $item->brand->id }}</span></label>
                                 <input type="hidden" name="subcat" data-value="{{ $id }}" />
                                 <br />
                             @endforeach
@@ -213,8 +219,8 @@
                     </div>
                 </div>
 
-                 <!--category widget --->
-                 <div class="sidebar-widget widget-category-2 mb-30">
+                <!--category widget --->
+                <div class="sidebar-widget widget-category-2 mb-30">
                     <h5 class="section-title style-1 mb-30">Category</h5>
                     <ul>
 
@@ -230,8 +236,8 @@
                     </ul>
                 </div>
 
-                
-               
+
+
 
 
             </div>
@@ -266,6 +272,8 @@
                 scrollTop: 260
             }, 'slow');
             var value = $(this).data('value');
+
+
             $.ajax({
                 type: 'GET',
                 url: '/products/cat/low-to-high/' + value,
@@ -528,7 +536,7 @@
                     });
 
                     // Display products in the productContainer div
-                    $('#data').html(rows); 
+                    $('#data').html(rows);
 
                     var countData = '<p>We found <strong class="text-brand">' +
                         productsCount + '</strong> items for you!</p>'
@@ -621,13 +629,16 @@
 
                                         </a>
                                     </div>
+                                   
                                     <div class="product-action-1">
-                                        <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i
+                                        <a aria-label="Add To Wishlist" class="action-btn"  id="${value.product_id}" onclick="addToWishList(this.id)"><i
                                                 class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
+                                        <a aria-label="Compare" class="action-btn"   id="${value.product_id}" onclick="addToCompare(this.id)"><i
                                                 class="fi-rs-shuffle"></i></a>
                                         <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
-                                            data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                            data-bs-target='#quickViewModal${value.product_id}'><i class="fi-rs-eye"></i></a>
+                                           
+
                                     </div>
 
                                     
@@ -714,6 +725,8 @@
 
             var minValue = parseFloat(minValueText.replace('$', '').replace(/,/g, ''));
             var maxValue = parseFloat(maxValueText.replace('$', '').replace(/,/g, ''));
+
+            console.log(minValue)
 
 
 
@@ -808,7 +821,7 @@
                                     <div class="product-category">
                                         <a href="shop-grid-right.html"> ${value.product_category}</a>
                                     </div>
-                                    <h2><a href="shop-product-right.html">${value.product_name}</a></h2>
+                                    <h2><a href="#">${value.product_name}</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>

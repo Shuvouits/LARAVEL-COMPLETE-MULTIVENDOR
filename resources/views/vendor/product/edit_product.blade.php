@@ -63,14 +63,14 @@
 
                                     <div class="form-group mb-3">
                                         <label for="inputProductDescription" class="form-label">Short Description</label>
-                                        <textarea name="short_descp"   style="height: 600px;" class="form-control" id="inputProductDescription" rows="3">
+                                        <textarea name="short_descp"   style="height: 200px;" class="form-control" id="inputProductDescription" rows="3">
                                               {{ $products->short_descp }}
 				                       </textarea>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="inputProductDescription" class="form-label">Long Description</label>
-                                        <textarea id="mytextarea" name="long_descp" style="height: 600px;">
+                                        <textarea id="editor1" name="long_descp" style="height: 600px;">
 				                           {!! $products->long_descp !!}
                                         </textarea>
                                     </div>

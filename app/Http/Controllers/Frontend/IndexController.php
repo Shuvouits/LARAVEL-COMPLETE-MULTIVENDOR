@@ -23,6 +23,7 @@ class IndexController extends Controller
         $multiImage = MultiImg::where('product_id',$id)->get();
         $cat_id = $product->category_id;
         $relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->orderBy('id','DESC')->limit(4)->get();
+
         return view('frontend.product.product_details', compact('product','product_color', 'product_size','multiImage','relatedProduct'));
     }
 
@@ -94,6 +95,7 @@ class IndexController extends Controller
                 'discount_price' => $product->discount_price,
                 'discount_percent' => 100 - round(($product->discount_price * 100) / $product->selling_price),
                 'vendor_id' => $product->vendor_id,
+                'product_id' => $product->id
                 // Add other product attributes as needed
             ];
         }
@@ -146,6 +148,7 @@ class IndexController extends Controller
                 'discount_percent' => 100 - round(($product->discount_price * 100) / $product->selling_price),
                 'vendor_id' => $product->vendor_id,
                 'total_product' => $count,
+                'product_id' => $product->id
                 // Add other product attributes as needed
             ];
         }
@@ -217,7 +220,7 @@ class IndexController extends Controller
     //category 
 
     public function CFilterLowToHigh($id){
-        $products = Product::where('category_id', $id)->orderBy('selling_price', 'asc')->get();
+        $products = Product::where('category_id', $id)->orderBy('discount_price', 'asc')->get();
         $formattedProducts = [];
         
         foreach ($products as $product) {
@@ -234,12 +237,13 @@ class IndexController extends Controller
             ];
         }
 
+
         return response()->json(['products' => $formattedProducts]);
 
     }   
 
     public function CFilterHighToLow($id){
-        $products = Product::where('category_id', $id)->orderBy('selling_price', 'desc')->get();
+        $products = Product::where('category_id', $id)->orderBy('discount_price', 'desc')->get();
 
         //return response()->json(['products' => $products]);
         $formattedProducts = [];
@@ -281,6 +285,7 @@ class IndexController extends Controller
                 'discount_percent' => 100 - round(($product->discount_price * 100) / $product->selling_price),
                 'vendor_id' => $product->vendor_id,
                 'total_product' => $count,
+                'product_id' => $product->id
                 // Add other product attributes as needed
             ];
         }

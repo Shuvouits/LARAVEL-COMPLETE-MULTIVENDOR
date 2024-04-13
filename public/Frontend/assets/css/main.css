@@ -60,7 +60,8 @@ time, mark, audio, video {
 
 thead {
   font-weight: 600;
-}
+} 
+
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -3512,7 +3513,7 @@ table .product-thumbnail img {
   border-radius: 15px;
   overflow: hidden;
   height: 520px;
-  background: url(../imgs/banner/banner-4.png) no-repeat center bottom;
+  background: url(../imgs/banner/illustration-ecommerce-devices-with-icons-representing-purchases-payments-products_138529-325.jpg) no-repeat center bottom;
   background-size: cover;
   width: 100%;
 }

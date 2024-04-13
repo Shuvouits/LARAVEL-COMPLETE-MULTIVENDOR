@@ -63,9 +63,12 @@
                                         <textarea name="short_descp" class="form-control" id="inputProductDescription" rows="3"></textarea>
                                     </div>
 
+                                
+
                                     <div class="mb-3 form-group">
                                         <label for="inputProductDescription" class="form-label">Long Description</label>
-                                        <textarea id="mytextarea" name="long_descp">Hello, World!</textarea>
+                                        <textarea id="editor1" name="long_descp"></textarea>
+
                                     </div>
 
 

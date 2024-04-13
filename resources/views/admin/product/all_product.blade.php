@@ -44,7 +44,7 @@
                                     <td> {{ $key + 1 }} </td>
                                     <td> <img src="{{ asset($item->product_thambnail) }}" style="width: 80px; height:80px; border-radius : 10px; border : 1px solid gainsboro">
                                     </td>
-                                    <td>{{ $item->product_name }}</td>
+                                    <td>{{ \Illuminate\Support\Str::limit($item->product_name, 50) }}</td>
                                     <td>{{ $item->selling_price }}</td>
                                     <td>{{ $item->product_qty }}</td>
 

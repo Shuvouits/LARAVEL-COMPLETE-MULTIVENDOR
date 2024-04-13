@@ -70,7 +70,7 @@
 
                                     <div class="mb-3">
                                         <label for="inputProductDescription" class="form-label">Long Description</label>
-                                        <textarea id="mytextarea" name="long_descp" style="height: 600px;">
+                                        <textarea id="editor1" name="long_descp" style="height: 600px;">
 				                           {!! $products->long_descp !!}
                                         </textarea>
                                     </div>

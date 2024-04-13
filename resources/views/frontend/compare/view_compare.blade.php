@@ -22,10 +22,23 @@
             <h6 class="text-body mb-40">There are products to compare</h6>
             <div class="table-responsive">
                 <table class="table text-center table-compare">
-                    <tbody id="compare">
+                    
+                        <thead>
+                            <tr class="pr_image">
+                                <td class="text-muted font-sm fw-600 font-heading mw-200">Preview</td>
+                                <td class="text-muted font-sm fw-600 font-heading">Name</td>
+                                <td class="text-muted font-sm fw-600 font-heading">Price</td>
+                                <td class="text-muted font-sm fw-600 font-heading">Description</td>
+                                <td class="text-muted font-sm fw-600 font-heading">Stock status</td>
+                                <td class="text-muted font-md fw-600">Action</td>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody id="compare">
 
                         
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
         </div>

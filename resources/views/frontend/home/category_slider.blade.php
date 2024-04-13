@@ -20,10 +20,10 @@
                 @foreach($category_data as $item)
                 <div class="card-2 bg-12 wow animate__animated animate__fadeInUp" data-wow-delay="1s">
                     <figure class="img-hover-scale overflow-hidden">
-                        <a href="shop-grid-right.html"><img src="{{ asset($item->category_image) }}"
+                        <a href="/product/category/{{$item->id}}/{{$item->category_slug}}"><img src="{{ asset($item->category_image) }}"
                                 alt="" /></a>
                     </figure>
-                    <h6><a href="shop-grid-right.html">{{ $item->category_name }}</a></h6>
+                    <h6><a href="/product/category/{{$item->id}}/{{$item->category_slug}}">{{ $item->category_name }}</a></h6>
 
                     @php
                         $product = App\Models\Product::where('category_id', $item->id)->get();
