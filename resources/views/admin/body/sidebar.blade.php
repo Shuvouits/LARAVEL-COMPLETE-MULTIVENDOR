@@ -1,4 +1,4 @@
-<div class="sidebar-wrapper" data-simplebar="true" style="overflow-y: auto; overflow-x : hidden">
+<div class="sidebar-wrapper" data-simplebar="true" >
     <div class="sidebar-header">
         <div>
             <img src="{{ asset('AdminBackend/assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">

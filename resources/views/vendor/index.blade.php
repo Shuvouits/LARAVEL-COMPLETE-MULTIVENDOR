@@ -15,7 +15,7 @@
             <div class="card radius-10 bg-gradient-deepblue">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <h5 class="mb-0 text-white">9526</h5>
+                        <h5 class="mb-0 text-white">${{$total_price}}</h5>
                         <div class="ms-auto">
                             <i class='bx bx-cart fs-3 text-white'></i>
                         </div>
@@ -55,7 +55,7 @@
             <div class="card radius-10 bg-gradient-ohhappiness">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <h5 class="mb-0 text-white">6200</h5>
+                        <h5 class="mb-0 text-white">{{$number_of_user}}</h5>
                         <div class="ms-auto">
                             <i class='bx bx-group fs-3 text-white'></i>
                         </div>
@@ -128,23 +128,27 @@
                     </thead>
                     <tbody>
 
+                        @foreach($all_order as $item)
+
                         <tr>
-                            <td>#897656</td>
+                            <td>#{{$item->order_id}}</td>
                             <td>
                                 <div class="d-flex align-items-center">
                                     <div class="recent-product-img">
-                                        <img src="{{asset('AdminBackend/assets/images/icons/chair.png')}}" alt="">
+                                        
+                                        <img src="{{asset($item->product->product_thambnail)}}" alt="">
                                     </div>
                                     <div class="ms-2">
-                                        <h6 class="mb-1 font-14">Light Blue Chair</h6>
+                                        <h6 class="mb-1 font-14">{{$item->product->product_name}}</h6>
                                     </div>
                                 </div>
                             </td>
-                            <td>Brooklyn Zeo</td>
-                            <td>12 Jul 2020</td>
-                            <td>$64.00</td>
+                            <td>{{$item->order->user->name}}</td>
+                            <td>{{$item->created_at->format('d M Y')}}
+                            </td>
+                            <td>${{$item->price}}</td>
                             <td>
-                                <div class="badge rounded-pill bg-light-info text-info w-100">In Progress
+                                <div class="badge rounded-pill bg-light-info text-info w-100">{{$item->order->status}}
                                 </div>
                             </td>
                             <td>
@@ -155,6 +159,8 @@
                                 </div>
                             </td>
                         </tr>
+
+                        @endforeach
 
 
                        

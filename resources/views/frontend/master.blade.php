@@ -16,7 +16,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('Frontend/assets/imgs/theme/favicon.svg') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('Frontend/assets/imgs/banner/favicon.png') }}" />
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('Frontend/assets/css/plugins/animate.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('Frontend/assets/css/plugins/slider-range.css') }}" />
@@ -25,6 +25,13 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
     <script src="https://js.stripe.com/v3/"></script>
 </head>
+
+<style>
+    .hero-slider-1 .single-hero-slider{
+        height: 700px !important;
+        
+    }
+</style>
 
 <body>
     <!-- Modal -->
@@ -59,7 +66,7 @@
     <!-- Vendor JS-->
     <script src="{{ asset('Frontend/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
     <script src="{{ asset('Frontend/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('Frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
+    {{-- <script src="{{ asset('Frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script> --}} 
     <script src="{{ asset('Frontend/assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('Frontend/assets/js/plugins/slick.js') }}"></script>
     <script src="{{ asset('Frontend/assets/js/plugins/jquery.syotimer.min.js') }}"></script>

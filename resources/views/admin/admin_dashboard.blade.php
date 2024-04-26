@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark-theme">
 
 <head>
     <!-- Required meta tags -->
@@ -8,35 +8,34 @@
     <!--favicon-->
     <link rel="icon" href="{{ asset('AdminBackend/assets/images/favicon-32x32.png') }}" type="image/png" />
 
-    <link href="{{ asset('AdminBackend/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />  
+    <link href="{{ asset('AdminBackend/assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/css/pace.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/css/pace.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/js/pace.min.js') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/css/bootstrap-extended.css') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/css/app.css') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/css/icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/css/icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/css/dark-theme.css') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/css/semi-dark.css') }}" rel="stylesheet" />
+    <link href="{{ asset('AdminBackend/assets/css/header-colors.css') }}" rel="stylesheet" />
 
+    <link href="{{asset('flatpicker.css')}}" rel="stylesheet" />
+
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
     <!--plugins-->
-    <link href="{{ asset('AdminBackend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
-    <link href="{{ asset('AdminBackend/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet') }}" />
-    <link href="{{ asset('AdminBackend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}"
-        rel="stylesheet" />
-    <link href="{{ asset('AdminBackend/assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
-
-    <link href="{{ asset('AdminBackend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}"
-        rel="stylesheet" />
+	<link href="{{asset('Backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" />
 
 
-    <!-- loader-->
-    <link href="{{ asset('AdminBackend/assets/css/pace.min.css') }}" rel="stylesheet" />
-    <script src="{{ asset('AdminBackend/assets/js/pace.min.js') }}"></script>
-    <!-- Bootstrap CSS -->
-    <link href="{{ asset('AdminBackend/assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('AdminBackend/assets/css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('AdminBackend/assets/css/icons.css') }}" rel="stylesheet">
-    <!-- Theme Style CSS -->
-    <link rel="stylesheet" href="{{ asset('AdminBackend/assets/css/dark-theme.css') }}" />
-    <link rel="stylesheet" href="{{ asset('AdminBackend/assets/css/semi-dark.css') }}" />
-    <link rel="stylesheet" href="{{ asset('AdminBackend/assets/css/header-colors.css') }}" />
-   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Admin Dashboard</title>
     <style>

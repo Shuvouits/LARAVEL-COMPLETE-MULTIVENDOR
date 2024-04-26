@@ -30,7 +30,7 @@ TABLE CONTENT
 /*import vendors*/
 @import url(vendors/normalize.css);
 @import url(vendors/bootstrap.min.css);
-@import url(vendors/uicons-regular-straight.css);
+ @import url(vendors/uicons-regular-straight.css);
 /*import plugins*/
 @import url(plugins/magnific-popup.css);
 @import url(plugins/select2.min.css);
@@ -316,7 +316,7 @@ input[type=number]:focus,
 }
 
 .text-brand {
-  color: #3BB77E !important;
+  color: #0c55aa !important;
 }
 
 .text-brand-2 {
@@ -368,7 +368,7 @@ input[type=number]:focus,
 }
 
 .bg-brand {
-  background-color: #3BB77E !important;
+  background-color: #0c55aa !important;
 }
 
 .bg-primary {
@@ -2972,7 +2972,7 @@ input.qty-val {
 
 .breadcrumb span::before {
   content: "\f111";
-  font-family: "uicons-regular-straight"  !important;
+ font-family: "uicons-regular-straight"  !important;
   display: inline-block;
   font-size: 9px;
 }
@@ -8283,7 +8283,7 @@ h6.post-title {
 }
 
 .header-style-1 .select2-container--default .select2-selection--single .select2-selection__arrow b::after {
-  font-family: uicons-regular-straight !important;
+  font-family: uicons-regular-straight !important; 
   font-style: normal;
   font-weight: normal !important;
   font-variant: normal;
@@ -8349,7 +8349,7 @@ h6.post-title {
 }
 
 .header-style-1 .search-location .select2-container--default .select2-selection--single .select2-selection__rendered:before {
-  font-family: uicons-regular-straight !important;
+ font-family: uicons-regular-straight !important; 
   content: "\f1c6";
   color: #B6B6B6;
   margin-right: 7px;
@@ -8996,7 +8996,7 @@ span.fi-rs-apps {
 
 .categories-dropdown-wrap ul li.has-children > a::after {
   content: "\f111";
-  font-family: 'uicons-regular-straight' !important;
+ font-family: 'uicons-regular-straight' !important; 
   position: absolute;
   right: 30px;
   top: 50%;
@@ -9326,7 +9326,7 @@ span.fi-rs-apps {
 
 .widget-category-2 ul li.has-children > a::after {
   content: "\f111";
-  font-family: 'uicons-regular-straight' !important;
+  font-family: 'uicons-regular-straight' !important; 
   position: absolute;
   right: 30px;
   top: 50%;

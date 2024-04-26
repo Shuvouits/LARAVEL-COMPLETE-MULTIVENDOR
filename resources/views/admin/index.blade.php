@@ -10,12 +10,8 @@
             $year = date('Y');
             $year = App\Models\Order::where('order_year', $year)->sum('amount');
             $pending = App\Models\Order::where('status', 'pending')->get();
-            $vendor = App\Models\User::where('status', 'active')
-                ->where('role', 'vendor')
-                ->get();
-            $customer = App\Models\User::where('status', 'active')
-                ->where('role', 'user')
-                ->get();
+            $vendor = App\Models\User::where('status', 'active')->where('role', 'vendor')->get();
+            $customer = App\Models\User::where('status', 'active')->where('role', 'user')->get();
         @endphp
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
@@ -102,9 +98,6 @@
                 </div>
             </div>
 
-
-
-
             <div class="col">
                 <div class="card radius-10 bg-gradient-ibiza">
                     <div class="card-body">
@@ -141,60 +134,58 @@
 
 
     @php
-        $orders = App\Models\Order::where('status', 'pending')
-            ->orderBy('id', 'DESC')
-            ->limit(10)
-            ->get();
+        $orders = App\Models\Order::where('status', 'pending')->orderBy('id', 'DESC')->limit(10)->get();
     @endphp
 
+    <div class="row col-md-12 col-xl-12">
 
-    <div class="card radius-10">
-        <div class="card-body">
-            <div class="d-flex align-items-center">
-                <div>
-                    <h5 class="mb-0">Orders Summary</h5>
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-0">Orders Summary</h5>
+                    </div>
+                    <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
+                    </div>
                 </div>
-                <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
+                <hr>
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Sl</th>
+                                <th>Date</th>
+                                <th>Invoice</th>
+                                <th>Amount</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach ($orders as $key => $order)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+
+                                    <td>{{ $order->order_date }}</td>
+                                    <td>{{ $order->invoice_no }}</td>
+                                    <td>${{ $order->amount }}</td>
+                                    <td>{{ $order->payment_method }}</td>
+                                    <td>
+                                        <div class="badge rounded-pill bg-light-info text-info w-100">
+                                            {{ $order->status }}</div>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+
+                    </table>
                 </div>
-            </div>
-            <hr>
-            <div class="table-responsive">
-                <table class="table align-middle mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Sl</th>
-                            <th>Date</th>
-                            <th>Invoice</th>
-                            <th>Amount</th>
-                            <th>Payment</th>
-                            <th>Status</th>
-
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        
-                        @foreach($orders as $key => $order)
-                        <tr>
-                            <td>{{ $key+1 }}</td>
-
-		<td>{{ $order->order_date }}</td>
-		<td>{{ $order->invoice_no }}</td>
-		<td>${{ $order->amount }}</td>
-		<td>{{ $order->payment_method }}</td>
-        <td>
-            <div class="badge rounded-pill bg-light-info text-info w-100"> 
-				{{ $order->status  }}</div>
-        </td>
-                            
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    
-                </table>
             </div>
         </div>
-    </div>
 
     </div>
 @endsection

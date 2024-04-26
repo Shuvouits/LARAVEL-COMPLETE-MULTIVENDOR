@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +14,17 @@ use Illuminate\Support\Facades\Notification;
 class VendorController extends Controller
 {
     public function VendorDashboard(){
-        return view('vendor.index');
+        $vendor_id = Auth::user()->id;
+        $all_order = OrderItem::where('vendor_id', $vendor_id)->get();
+        $total_price = OrderItem::where('vendor_id', $vendor_id)->sum('price');
+        
+        $number_of_user = Order::join('order_items', 'orders.id', '=', 'order_items.order_id')
+        ->where('order_items.vendor_id', $vendor_id)
+        ->select('orders.user_id')
+        ->distinct()
+        ->pluck('user_id')->count();
+
+        return view('vendor.index', compact('all_order', 'number_of_user', 'total_price'));
     }
 
     public function VendorDestroy(Request $request)

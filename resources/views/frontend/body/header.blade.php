@@ -263,6 +263,13 @@
 
                             @endauth
 
+                            <div class="header-action-icon-2">
+                                <a href="/admin/login" target="_blank"><span class="lable ml-0">Admin Login</span></a>
+                                <span class="lable ml-2"> | </span>
+                                <a href="/vendor/login" target="_blank"><span class="lable ml-2">Vendor Login</span></a>
+
+                            </div>
+
 
 
                         </div>
