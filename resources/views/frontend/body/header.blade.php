@@ -291,7 +291,7 @@
             <div class="header-wrap header-space-between position-relative">
                 <div class="logo logo-width-1 d-block d-lg-none">
                     <a href="/"><img src="{{ asset($setting->logo) }}"
-                            alt="logo" /></a>
+                        alt="logo" style="margin-left : -80px" /></a>
                 </div>
                 <div class="header-nav d-none d-lg-flex">
                     <div class="main-categori-wrap d-none d-lg-block">
@@ -538,7 +538,7 @@
         <div class="mobile-header-top">
             <div class="mobile-header-logo">
                 <a href="/"><img src="{{ asset($setting->logo) }}"
-                        alt="logo" /></a>
+                    alt="logo" /></a>
             </div>
             <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                 <button class="close-style search-close">
