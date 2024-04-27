@@ -10,7 +10,7 @@
                     <a href="{{$item->slider_title}}">
 
                         <div class="single-hero-slider single-animation-wrap"
-                            style="background-image: url({{ asset($item->slider_image) }})">
+                            style="background-image: url({{ asset($item->slider_image) }});  ">
                             <div class="slider-content">
 
                                 {{--  

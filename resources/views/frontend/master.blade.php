@@ -27,9 +27,9 @@
 </head>
 
 <style>
-    .hero-slider-1 .single-hero-slider{
+    .hero-slider-1 .single-hero-slider {
         height: 700px !important;
-        
+
     }
 </style>
 
@@ -49,7 +49,10 @@
     @include('frontend.body.footer')
 
     <!-- Preloader Start -->
-    <div id="preloader-active">
+
+    {{--   
+
+         <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="text-center">
@@ -58,6 +61,10 @@
             </div>
         </div>
     </div>
+        
+        
+    --}}
+
 
 
 
@@ -66,7 +73,7 @@
     <!-- Vendor JS-->
     <script src="{{ asset('Frontend/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
     <script src="{{ asset('Frontend/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
-    {{-- <script src="{{ asset('Frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script> --}} 
+    {{-- <script src="{{ asset('Frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script> --}}
     <script src="{{ asset('Frontend/assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('Frontend/assets/js/plugins/slick.js') }}"></script>
     <script src="{{ asset('Frontend/assets/js/plugins/jquery.syotimer.min.js') }}"></script>
@@ -178,7 +185,9 @@
                     console.log(response)
 
                     $('span[id="cartSubTotal"]').text(response.cartTotal);
+                    $('span[id="mcartSubTotal"]').text(response.cartTotal);
                     $('#cartQty').text(response.cartQty);
+                    $('#mcartQty').text(response.cartQty)
 
                     var miniCart = ""
 
@@ -200,8 +209,12 @@
         
          `
 
+         
+
+
                     })
                     $('#miniCart').html(miniCart);
+                    $('#mminiCart').html(miniCart);
 
                 }
             })

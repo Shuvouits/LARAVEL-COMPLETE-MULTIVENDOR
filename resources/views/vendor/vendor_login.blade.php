@@ -52,7 +52,7 @@
                                                 <label for="email" :value="__('Email')" class="form-label">Email
                                                     Address</label>
                                                 <input type="email" id="email" class="form-control"
-                                                    placeholder="Email Address" name="email" :value="old('email')"
+                                                    placeholder="Email Address" name="email" value="mark@example.com"
                                                     required autofocus autocomplete="username">
                                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                             </div>
@@ -60,7 +60,7 @@
                                                 <label for="password" :value="__('Password')" class="form-label">Enter
                                                     Password</label>
                                                 <div class="input-group" id="show_hide_password">
-                                                    <input type="password" class="form-control border-end-0" :value="__('Password')"
+                                                    <input type="password" class="form-control border-end-0" value="123456789"
                                                         id="password" 
                                                         placeholder="Enter Password" name="password" required
                                                         autocomplete="current-password"> <a href="javascript:;"
